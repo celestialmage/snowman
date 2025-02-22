@@ -73,7 +73,7 @@ def snowman(snowman_word):
     else:
         # if puzzle_solved resolves to False
 
-        # prints a status message that consolates the player on loss and reveals the snowman_word
+        # prints a status message that consoles the player on loss and reveals the snowman_word
         print(f"Sorry, you lose! The word was {snowman_word}")
 
 
