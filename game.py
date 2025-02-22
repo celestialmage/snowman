@@ -15,7 +15,7 @@ SNOWMAN_GRAPHIC = [
 
 def snowman(snowman_word):
 
-    print(snowman_word)
+    # print(snowman_word)
 
     WORD_LENGTH = len(snowman_word) 
 
