@@ -1,5 +1,3 @@
-from wonderwords import RandomWord
-
 SNOWMAN_MIN_WORD_LENGTH = 5
 SNOWMAN_MAX_WORD_LENGTH = 8
 SNOWMAN_MAX_WRONG_GUESSES = 7
@@ -16,10 +14,6 @@ SNOWMAN_GRAPHIC = [
 
 
 def snowman(snowman_word):
-    random_word_generator = RandomWord()
-    snowman_word = random_word_generator.word(
-        word_min_length=SNOWMAN_MIN_WORD_LENGTH,
-        word_max_length=SNOWMAN_MAX_WORD_LENGTH)
 
     print(snowman_word)
 
@@ -47,10 +41,12 @@ def snowman(snowman_word):
     
     generate_word_progress_string(snowman_word, correct_letter_guess_statuses)
 
+    print(generate_word_progress_string(snowman_word, correct_letter_guess_statuses))
+
     if puzzle_solved:
         print("Congratulations, you win!")
     else:
-        print(f"Sorry, you lose! the word was {snowman_word}")
+        print(f"Sorry, you lose! The word was {snowman_word}")
 
 
 def print_snowman_graphic(wrong_guesses_count):
