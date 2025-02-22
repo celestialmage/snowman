@@ -1,3 +1,5 @@
+from wonderwords import RandomWord
+
 SNOWMAN_MIN_WORD_LENGTH = 5
 SNOWMAN_MAX_WORD_LENGTH = 8
 SNOWMAN_MAX_WRONG_GUESSES = 7
@@ -14,13 +16,41 @@ SNOWMAN_GRAPHIC = [
 
 
 def snowman(snowman_word):
-    """Complete the snowman function
-    replace "pass" below with your own code
-    It should print 'Congratulations, you win!'
-    If the player wins and, 
-    'Sorry, you lose! The word was {snowman_word}' if the player loses
-    """
-    pass
+    random_word_generator = RandomWord()
+    snowman_word = random_word_generator.word(
+        word_min_length=SNOWMAN_MIN_WORD_LENGTH,
+        word_max_length=SNOWMAN_MAX_WORD_LENGTH)
+
+    print(snowman_word)
+
+    WORD_LENGTH = len(snowman_word) 
+
+    correct_letter_guess_statuses = build_letter_status_dict(snowman_word)
+    wrong_guesses_list = []
+    puzzle_solved = False
+
+    while len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES and puzzle_solved is not True:
+
+        generate_word_progress_string(snowman_word, correct_letter_guess_statuses)
+        
+        user_letter = get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list)
+
+        if user_letter in correct_letter_guess_statuses:
+            print("You guessed a letter that's in the word!")
+            correct_letter_guess_statuses[user_letter] = True
+        else:
+            print(f"The letter '{user_letter}' is not in the word.")
+            wrong_guesses_list.append(user_letter)
+            print_snowman_graphic(len(wrong_guesses_list))
+        
+        puzzle_solved = is_word_guessed(correct_letter_guess_statuses)
+    
+    generate_word_progress_string(snowman_word, correct_letter_guess_statuses)
+
+    if puzzle_solved:
+        print("Congratulations, you win!")
+    else:
+        print(f"Sorry, you lose! the word was {snowman_word}")
 
 
 def print_snowman_graphic(wrong_guesses_count):
