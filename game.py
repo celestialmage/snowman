@@ -31,7 +31,7 @@ def snowman(snowman_word):
 
     while len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES and puzzle_solved is not True:
 
-        generate_word_progress_string(snowman_word, correct_letter_guess_statuses)
+        print(generate_word_progress_string(snowman_word, correct_letter_guess_statuses))
         
         user_letter = get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list)
 
