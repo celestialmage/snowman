@@ -43,7 +43,7 @@ def snowman(snowman_word):
             wrong_guesses_list.append(user_letter)
             print_snowman_graphic(len(wrong_guesses_list))
         
-        puzzle_solved = is_word_guessed(correct_letter_guess_statuses)
+        puzzle_solved = is_word_guessed(snowman_word, correct_letter_guess_statuses)
     
     generate_word_progress_string(snowman_word, correct_letter_guess_statuses)
 
