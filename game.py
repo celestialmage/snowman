@@ -26,6 +26,9 @@ def snowman(snowman_word):
 
         print_word_progress_string(snowman_word, correct_letter_guess_statuses)
         
+        if num_wrong_guesses > 0:
+            print(", ".join(wrong_guesses_list))
+
         user_letter = get_letter_from_user(correct_letter_guess_statuses, wrong_guesses_list)
 
         if user_letter in correct_letter_guess_statuses:
@@ -38,13 +41,8 @@ def snowman(snowman_word):
             wrong_guesses_list.append(user_letter)
             num_wrong_guesses += 1
             print_snowman_graphic(num_wrong_guesses)
-
-        print(", ".join(wrong_guesses_list))
         
-        puzzle_solved = is_word_guessed(snowman_word, correct_letter_guess_statuses)
-    
-
-    print(generate_word_progress_string(snowman_word, correct_letter_guess_statuses))
+        puzzle_solved = is_word_guessed(snowman_word, correct_letter_guess_statuses)    
 
     if puzzle_solved:
         print("Congratulations, you win!")
