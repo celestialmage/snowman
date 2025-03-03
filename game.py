@@ -15,8 +15,6 @@ SNOWMAN_GRAPHIC = [
 
 def snowman(snowman_word):
 
-    # print(snowman_word)
-
     # creates a constant that stores the length of the snowman word
     WORD_LENGTH = len(snowman_word) 
 
@@ -26,14 +24,16 @@ def snowman(snowman_word):
     wrong_guesses_list = []
     # boolean that stores the puzzle win state
     puzzle_solved = False
+    # int that stores the amount of wrong guesses
+    num_wrong_guesses = 0
 
     # while loop with the following exit conditions:
     # - the length of wrong_guesses_list equals or exceeds SNOWMAN_MAX_WRONG_GUESSES
     # - the puzzle_solved boolean's state is changed to True
-    while len(wrong_guesses_list) < SNOWMAN_MAX_WRONG_GUESSES and puzzle_solved is not True:
+    while num_wrong_guesses < SNOWMAN_MAX_WRONG_GUESSES and not puzzle_solved:
 
-        # print statement which calls the function that displays the current state of the snowman word
-        print(generate_word_progress_string(snowman_word, correct_letter_guess_statuses))
+        # generates the word progress string by calling the relevant function
+        print_word_progress_string(snowman_word, correct_letter_guess_statuses)
         
         # calls the function that receives input from the user and, if the input is valid, stores that
         # value into the user_letter variable
@@ -50,10 +50,15 @@ def snowman(snowman_word):
         else:
             # if the letter is not found
 
-            #prints a status message and adds the incorrect letter to the wrong_guesses_list
+            # prints a status message and adds the incorrect letter to the wrong_guesses_list
             print(f"The letter '{user_letter}' is not in the word.")
             wrong_guesses_list.append(user_letter)
-            print_snowman_graphic(len(wrong_guesses_list))
+            # increments the wrong guess counter and then generates the snowman image
+            num_wrong_guesses += 1
+            print_snowman_graphic(num_wrong_guesses)
+
+        #prints out all current incorrect guesses, separated by ", "
+        print(", ".join(wrong_guesses_list))
         
         # calls the function that checks the game state and assigns the resulting value to puzzle_solved
         puzzle_solved = is_word_guessed(snowman_word, correct_letter_guess_statuses)
